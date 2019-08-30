@@ -36,7 +36,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @see https://github.com/blongden/vnd.error
  * @author Oliver Gierke
  * @author Greg Turnquist
+ * @deprecated Use {@link org.springframework.hateoas.mediatype.problem.Problem} to form vendor neutral error messages.
  */
+@Deprecated
 public class VndErrors implements Iterable<VndErrors.VndError> {
 
 	private final List<VndError> vndErrors;
@@ -157,7 +159,9 @@ public class VndErrors implements Iterable<VndErrors.VndError> {
 	 * A single {@link VndError}.
 	 *
 	 * @author Oliver Gierke
+	 * @deprecated Use {@link org.springframework.hateoas.mediatype.problem.Problem} to form vendor neutral error messages.
 	 */
+	@Deprecated
 	public static class VndError extends RepresentationModel<VndError> {
 
 		@JsonProperty private final String logref;
