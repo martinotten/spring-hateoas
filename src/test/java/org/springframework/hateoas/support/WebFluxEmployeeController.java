@@ -18,6 +18,7 @@ package org.springframework.hateoas.support;
 import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.*;
 import static reactor.function.TupleUtils.*;
 
+import java.net.URI;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
@@ -30,7 +31,9 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Links;
+import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.hateoas.server.reactive.WebFluxLinkBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -173,5 +176,15 @@ public class WebFluxEmployeeController {
 						.location(findOne.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
 						.build() //
 				);
+	}
+
+	@GetMapping("/employees/problem")
+	public ResponseEntity<?> problem() {
+
+		return ResponseEntity.badRequest().body(new Problem() //
+				.withType(URI.create("http://example.com/problem")) //
+				.withTitle("Employee-based problem") //
+				.withStatus(HttpStatus.BAD_REQUEST) //
+				.withDetail("This is a test case"));
 	}
 }
